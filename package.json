@@ -1,0 +1,67 @@
+{
+  "name": "cs2-replay-terminal",
+  "productName": "梅花幼儿园复盘部",
+  "version": "1.0.0",
+  "description": "CS2 战术复盘终端 —— 本地解析 demo，出评分 / 阵型 / 回合 / 风格战报",
+  "main": "main.js",
+  "author": "小春",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "start:debug": "electron . --dev",
+    "sync": "node tools/sync-site.mjs",
+    "dist": "electron-builder --win",
+    "pack": "electron-builder --win --dir",
+    "build": "node tools/build-win.mjs"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.xiaochun.cs2.replay",
+    "productName": "CS2复盘终端",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "splash.html",
+      "site/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CS2复盘终端",
+      "artifactName": "CS2复盘终端-${version}-安装版.exe"
+    },
+    "asar": false,
+    "portable": {
+      "artifactName": "CS2复盘终端-${version}-便携版.exe",
+      "requestExecutionLevel": "user"
+    }
+  }
+}
